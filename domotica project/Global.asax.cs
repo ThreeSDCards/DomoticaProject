@@ -12,11 +12,12 @@ namespace domotica_project
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            Application["lamp 0"] = true;
-            Application["lamp 1"] = true;
-            Application["lamp 2"] = true;
-            Application["lamp 3"] = true;
-            Application["lamp 4"] = true;
+            int x = 0;
+            string[] strings = {"0","1","2","3","4"};
+            while(x < 5)
+            {
+                Application["lamp " + strings[x]] = true;
+            }
 
             Application["window 0"] = true;
             Application["window 1"] = true;
