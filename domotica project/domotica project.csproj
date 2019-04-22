@@ -82,6 +82,7 @@
     <Content Include="figures\future.PNG" />
     <Content Include="Game.aspx" />
     <Content Include="domotica\house.PNG" />
+    <Content Include="Global.asax" />
     <Content Include="mainMenu.aspx" />
     <Content Include="figures\mortal.PNG" />
     <Content Include="figures\race.PNG" />
@@ -108,6 +109,9 @@
     </Compile>
     <Compile Include="Game.aspx.designer.cs">
       <DependentUpon>Game.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="mainMenu.aspx.cs">
       <DependentUpon>mainMenu.aspx</DependentUpon>

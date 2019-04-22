@@ -15,27 +15,6 @@ namespace domotica_project.domotica
     {
         public static TcpClient client = new TcpClient();
 
-        string LAMP4ON = "lamp 4 on";
-        string LAMP4OFF = "lamp 4 off";
-
-        string LAMP3ON = "lamp 3 on";
-        string LAMP3OFF = "lamp 3 off";
-
-        string LAMP2ON = "lamp 2 on";
-        string LAMP2OFF = "lamp 2 off";
-
-        string LAMP1ON = "lamp 1 on";
-        string LAMP1OFF = "lamp 1 off";
-
-        string LAMP0ON = "lamp 0 on";
-        string LAMP0OFF = "lamp 0 off";
-
-        string WINDOW0ON = "window 0 open";
-        string WINDOW0OFF = "window 0 close";
-
-        string WINDOW1ON = "window 1 open";
-        string WINDOW1OFF = "window 1 close";
-
         protected void Page_Load(object sender, EventArgs e)
         {
             lblConStatus.Text = ConnectionStatus();
@@ -114,201 +93,89 @@ namespace domotica_project.domotica
 
         protected void btnLamp3_Click(object sender, EventArgs e)
         {
-            if (client.Connected)
-            {
-                NetworkStream commandstream = client.GetStream();
-
-                if (!(bool)Application["Lamp3"])
-                {
-                    LAMP3ON += Environment.NewLine;
-                    byte[] bLampOn = Encoding.ASCII.GetBytes(LAMP3ON);
-                    commandstream.Write(bLampOn, 0, bLampOn.Length);
-                    commandstream.Flush();
-                    Application["Lamp3"] = true;
-                }
-
-                else
-                {
-                    LAMP3OFF += Environment.NewLine;
-                    byte[] bLampOff = Encoding.ASCII.GetBytes(LAMP3OFF);
-                    commandstream.Write(bLampOff, 0, bLampOff.Length);
-                    Application["Lamp3"] = false;
-                }
-            }
-            else
-            {
-
-            }
+            Commandbuilder("Lamp 3");
         }
 
         protected void btnLamp1_Click(object sender, EventArgs e)
         {
-            if (client.Connected)
-            {
-                NetworkStream commandstream = client.GetStream();
-
-                if (!(bool)Application["Lamp1"])
-                {
-                    LAMP1ON += Environment.NewLine;
-                    byte[] bLampOn = Encoding.ASCII.GetBytes(LAMP1ON);
-                    commandstream.Write(bLampOn, 0, bLampOn.Length);
-                    commandstream.Flush();
-                    Application["Lamp1"] = true;
-                }
-
-                else
-                {
-                    LAMP1OFF += Environment.NewLine;
-                    byte[] bLampOff = Encoding.ASCII.GetBytes(LAMP1OFF);
-                    commandstream.Write(bLampOff, 0, bLampOff.Length);
-                    Application["Lamp1"] = false;
-                }
-            }
-            else
-            {
-
-            }
+            Commandbuilder("lamp 1");
         }
 
         protected void btnLamp0_Click(object sender, EventArgs e)
         {
-            if (client.Connected)
-            {
-                NetworkStream commandstream = client.GetStream();
-
-                if (!(bool)Application["Lamp0"])
-                {
-                    LAMP0ON += Environment.NewLine;
-                    byte[] bLampOn = Encoding.ASCII.GetBytes(LAMP0ON);
-                    commandstream.Write(bLampOn, 0, bLampOn.Length);
-                    commandstream.Flush();
-                    Application["Lamp0"] = true;
-                }
-
-                else
-                {
-                    LAMP0OFF += Environment.NewLine;
-                    byte[] bLampOff = Encoding.ASCII.GetBytes(LAMP0OFF);
-                    commandstream.Write(bLampOff, 0, bLampOff.Length);
-                    Application["Lamp0"] = false;
-                }
-            }
+            Commandbuilder("lamp 0");
         }
 
         protected void btnLamp2_Click(object sender, EventArgs e)
         {
-            if (client.Connected)
-            {
-                NetworkStream commandstream = client.GetStream();
-
-                if (!(bool)Application["Lamp2"])
-                {
-                    LAMP2ON += Environment.NewLine;
-                    byte[] bLampOn = Encoding.ASCII.GetBytes(LAMP2ON);
-                    commandstream.Write(bLampOn, 0, bLampOn.Length);
-                    commandstream.Flush();
-                    Application["Lamp2"] = true;
-                }
-
-                else
-                {
-                    LAMP2OFF += Environment.NewLine;
-                    byte[] bLampOff = Encoding.ASCII.GetBytes(LAMP2OFF);
-                    commandstream.Write(bLampOff, 0, bLampOff.Length);
-                    Application["Lamp2"] = false;
-                }
-            }
+            Commandbuilder("lamp 2");
         }
 
         protected void btnTemperature_Click(object sender, EventArgs e)
         {
-            string tempcommand = "heater " + txtTemperature.Text;
-
-            NetworkStream stream = client.GetStream();
-            tempcommand += Environment.NewLine;
-            byte[] bcommand = Encoding.ASCII.GetBytes(tempcommand);
-            stream.Write(bcommand, 0, bcommand.Length);
+            Commandbuilder("temp");
         }
 
         protected void btnWindow0_Click(object sender, EventArgs e)
         {
-            if (client.Connected)
-            {
-                NetworkStream commandstream = client.GetStream();
-
-                if ((bool)Application["Window0"])
-                {
-                    WINDOW0OFF += Environment.NewLine;
-                    byte[] bLampOn = Encoding.ASCII.GetBytes(WINDOW0OFF);
-                    commandstream.Write(bLampOn, 0, bLampOn.Length);
-                    commandstream.Flush();
-                    Application["Window0"] = false;
-                }
-
-                else
-                {
-                    WINDOW0ON += Environment.NewLine;
-                    byte[] bLampOff = Encoding.ASCII.GetBytes(WINDOW0ON);
-                    commandstream.Write(bLampOff, 0, bLampOff.Length);
-                    Application["Window0"] = true;
-                }
-            }
+            Commandbuilder("window 0");
         }
 
         protected void btnWindow1_Click(object sender, EventArgs e)
         {
-
-            if (client.Connected)
-            {
-                NetworkStream commandstream = client.GetStream();
-
-                if ((bool)Application["Window1"])
-                {
-                    WINDOW1OFF += Environment.NewLine;
-                    byte[] bLampOn = Encoding.ASCII.GetBytes(WINDOW1OFF);
-                    commandstream.Write(bLampOn, 0, bLampOn.Length);
-                    commandstream.Flush();
-                    Application["Window1"] = false;
-                }
-
-                else
-                {
-                    WINDOW1ON += Environment.NewLine;
-                    byte[] bLampOff = Encoding.ASCII.GetBytes(WINDOW1ON);
-                    commandstream.Write(bLampOff, 0, bLampOff.Length);
-                    Application["Window1"] = true;
-                }
-            }
+            Commandbuilder("window 1");
         }
 
         protected void btnLamp4_Click(object sender, EventArgs e)
         {
-
+            Commandbuilder("lamp 4");
+        }
+        void Commandbuilder(string obj)
+        {
             if (client.Connected)
             {
-                NetworkStream commandstream = client.GetStream();
+                NetworkStream cmdstream = client.GetStream();
+                string command = "";
 
-                if (!(bool)Application["Lamp4"])
+                if (obj == "temp")
                 {
-                    LAMP4ON += Environment.NewLine;
-                    byte[] bLampOn = Encoding.ASCII.GetBytes(LAMP4ON);
-                    commandstream.Write(bLampOn, 0, bLampOn.Length);
-                    commandstream.Flush();
-                    Application["Lamp4"] = true;
+                    command = "heater " + txtTemperature.Text;
                 }
-
                 else
                 {
-                    LAMP4OFF += Environment.NewLine;
-                    byte[] bLampOff = Encoding.ASCII.GetBytes(LAMP4OFF);
-                    commandstream.Write(bLampOff, 0, bLampOff.Length);
-                    Application["Lamp4"] = false;
+                    if ((bool)Application[obj])
+                    {
+                        if (obj.Contains("lamp"))
+                        {
+                            command = obj + " on\n";
+                        }
+                        else
+                        {
+                            command = obj + " close\n";
+                        }
+
+                    }
+                    else
+                    {
+                        if (obj.Contains("lamp"))
+                        {
+                            command = obj + " off\n";
+                        }
+                        else
+                        {
+                            command = obj + " open\n";
+                        }
+                    }
                 }
+                byte[] bcommand = Encoding.ASCII.GetBytes(command);
+                cmdstream.Write(bcommand, 0, bcommand.Length);
+                Application[obj] = !((bool)Application[obj]);
             }
             else
             {
 
             }
         }
+
     }
 }
